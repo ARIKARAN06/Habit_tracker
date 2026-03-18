@@ -66,6 +66,16 @@ def get_logs_by_date(target_date: str, db: Session = Depends(get_db)):
 def get_all_logs(db: Session = Depends(get_db)):
     return db.query(models.HabitLog).all()
 
+@app.delete("/habits/{habit_id}")
+def delete_habit(habit_id: int, db: Session = Depends(get_db)):
+    habit = db.query(models.Habit).filter(models.Habit.id == habit_id).first()
+    if not habit:
+        raise HTTPException(status_code=404, detail="Habit not found")
+    # Delete associated logs first
+    db.query(models.HabitLog).filter(models.HabitLog.habit_id == habit_id).delete()
+    db.delete(habit)
+    db.commit()
+    return {"message": "Habit deleted"}
 @app.get("/stats/")
 def get_user_stats(db: Session = Depends(get_db)):
     # Very basic streak and consistency calculation

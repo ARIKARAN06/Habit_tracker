@@ -69,6 +69,14 @@ function App() {
     } catch (error) { console.error('Error toggling habit:', error); }
   };
 
+  const deleteHabit = async (habitId, title) => {
+    if (!window.confirm(`Delete "${title}"? This will remove all its logs too.`)) return;
+    try {
+      await axios.delete(`${API_URL}/habits/${habitId}`);
+      fetchData();
+    } catch (error) { console.error('Error deleting habit:', error); }
+  };
+
   const sendChatMessage = async (e) => {
     e.preventDefault();
     if (!chatInput.trim() || isSending) return;
@@ -216,8 +224,18 @@ function App() {
                 ) : (
                   habits.map(habit => (
                     <div key={habit.id} className="neon-border" style={{ background: '#12122a', borderRadius: '12px', padding: '16px 20px' }}>
-                      <div style={{ fontSize: '1rem', fontWeight: 700, color: '#e0e0ff', marginBottom: '12px', letterSpacing: '0.5px' }}>
-                        {habit.title}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                        <span style={{ fontSize: '1rem', fontWeight: 700, color: '#e0e0ff', letterSpacing: '0.5px' }}>
+                          {habit.title}
+                        </span>
+                        <button onClick={() => deleteHabit(habit.id, habit.title)} title="Delete habit"
+                          style={{
+                            background: 'none', border: '1px solid #ff444444', borderRadius: '6px',
+                            color: '#ff4444', cursor: 'pointer', padding: '4px 8px', fontSize: '0.75rem',
+                            transition: 'all 0.2s ease', letterSpacing: '1px',
+                          }}>
+                          ✕
+                        </button>
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         {weekDates.map((dateStr, index) => {
