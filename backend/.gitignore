@@ -1,0 +1,12 @@
+# Byte-compiled
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+
+# Database
+*.db
+
+# Environment variables
+.env

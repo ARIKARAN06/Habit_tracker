@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+sqlalchemy
+groq
+pydantic
+python-dotenv

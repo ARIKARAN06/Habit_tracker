@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #0a0a1a;
+  color: #e0e0ff;
+  font-family: 'Orbitron', 'Rajdhani', 'Segoe UI', sans-serif;
+  min-height: 100vh;
+}
+
+/* Neon glow effects */
+.neon-border {
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.1), inset 0 0 10px rgba(0, 255, 255, 0.05);
+}
+
+.neon-text {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.neon-pink {
+  text-shadow: 0 0 10px rgba(255, 0, 128, 0.5), 0 0 20px rgba(255, 0, 128, 0.3);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a1a;
+}
+::-webkit-scrollbar-thumb {
+  background: #00ffff33;
+  border-radius: 3px;
+}
+
+/* Chat messages animation */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.chat-msg {
+  animation: fadeSlideIn 0.3s ease-out;
+}
+
+/* Pulse animation for streak */
+@keyframes cyberpulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(255, 0, 128, 0.4); }
+  50% { box-shadow: 0 0 20px rgba(255, 0, 128, 0.8), 0 0 40px rgba(255, 0, 128, 0.3); }
+}
+.cyber-pulse {
+  animation: cyberpulse 2s ease-in-out infinite;
+}
